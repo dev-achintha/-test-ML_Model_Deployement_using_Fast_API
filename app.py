@@ -26,6 +26,12 @@ if st.button("Predict"):
         "Age": age
     }
 
-    response = requests.get(url, params=params)
-    result = response.json()
-    st.write(result)
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+        result = response.json()
+        st.write(result)
+    except requests.exceptions.JSONDecodeError:
+        st.error("Error decoding the response. Please try again later.")
+    except requests.exceptions.RequestException as e:
+        st.error(f"An error occurred: {e}")
