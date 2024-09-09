@@ -1,38 +1,23 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Query
 import pickle
-import json
 
 app = FastAPI()
-
-class model_input(BaseModel):
-    pregnancies: int
-    Glucose: int
-    BloodPressure: int
-    SkinThickness: int
-    Insulin: int
-    BMI: float
-    DiabetesPedigreeFunction: float
-    Age: int
 
 # loading the saved model
 diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
 
-@app.post('/api/diabetes_prediction')
-async def diabetes_predd(input_parameters: model_input):
-    input_data = input_parameters.json()
-    input_dictionary = json.loads(input_data)
-    
-    input_list = [
-        input_dictionary['pregnancies'],
-        input_dictionary['Glucose'],
-        input_dictionary['BloodPressure'],
-        input_dictionary['SkinThickness'],
-        input_dictionary['Insulin'],
-        input_dictionary['BMI'],
-        input_dictionary['DiabetesPedigreeFunction'],
-        input_dictionary['Age']
-    ]
+@app.get('/api/diabetes_prediction')
+async def diabetes_predd(
+    pregnancies: int = Query(...),
+    Glucose: int = Query(...),
+    BloodPressure: int = Query(...),
+    SkinThickness: int = Query(...),
+    Insulin: int = Query(...),
+    BMI: float = Query(...),
+    DiabetesPedigreeFunction: float = Query(...),
+    Age: int = Query(...)
+):
+    input_list = [pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]
     
     prediction = diabetes_model.predict([input_list])
     
