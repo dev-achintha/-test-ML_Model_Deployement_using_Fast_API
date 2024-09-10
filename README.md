@@ -37,7 +37,7 @@ You can make requests to the following URL:
 https://diabetes-prediction-model-5d9550a8d37f.herokuapp.com/api/diabetes_prediction
 
 ```
-/api/diabetes_prediction + ``` ?pregnancies=2&Glucose=120&BloodPressure=80&SkinThickness=20&Insulin=85&BMI=25.5&DiabetesPedigreeFunction=0.5&Age=33 ```
+```/api/diabetes_prediction``` + ```?pregnancies=2&Glucose=120&BloodPressure=80&SkinThickness=20&Insulin=85&BMI=25.5&DiabetesPedigreeFunction=0.5&Age=33```
 
 ### Required Query Parameters:
 - `pregnancies`: Integer
