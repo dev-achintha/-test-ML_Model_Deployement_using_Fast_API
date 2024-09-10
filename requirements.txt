@@ -1,6 +1,4 @@
 fastapi
 uvicorn
-pydantic
 scikit-learn
-requests
-streamlit
+pydantic
